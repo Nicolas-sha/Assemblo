@@ -13,6 +13,8 @@ export type Etape = {
   /** Texte affiché après « Pièces utilisées : » */
   pieces: string;
   image?: string;
+  /** Recherche Pexels pour l'illustration quand `image` est absente. */
+  requetePexels?: string;
 };
 
 /** Pièces de la vérification (écran « Vérifiez vos pièces »). */
@@ -35,20 +37,20 @@ export const etapes: Etape[] = [
     pieces: "plateau × 1",
     image: "/images/etape-1.png",
   },
-  { n: 2, titre: "Insérez les chevilles dans le plateau", texte: "Enfoncez 6 chevilles en bois dans les trous du plateau, sans forcer.", pieces: "cheville en bois × 6" },
-  { n: 3, titre: "Fixez le premier panneau latéral", texte: "Emboîtez le panneau latéral gauche sur les chevilles, puis serrez 4 vis de 8 mm.", pieces: "panneau latéral × 1, vis 8 mm × 4" },
-  { n: 4, titre: "Fixez le second panneau latéral", texte: "Faites la même chose du côté droit. Vérifiez que les deux panneaux sont bien parallèles.", pieces: "panneau latéral × 1, vis 8 mm × 4" },
-  { n: 5, titre: "Assemblez les coulisses côté gauche", texte: "Vissez les trois coulisses de tiroir sur la face intérieure du panneau gauche.", pieces: "coulisse de tiroir × 3, vis 8 mm × 6" },
-  { n: 6, titre: "Assemblez les coulisses côté droit", texte: "Vissez les trois coulisses restantes en face, à la même hauteur que celles de gauche.", pieces: "coulisse de tiroir × 3, vis 8 mm × 6" },
-  { n: 7, titre: "Montez le fond du meuble", texte: "Glissez le fond dans la rainure arrière, puis fixez-le avec quelques vis.", pieces: "vis 8 mm × 4" },
-  { n: 8, titre: "Retournez le meuble", texte: "À deux si possible, redressez doucement le meuble sur ses pieds.", pieces: "aucune" },
-  { n: 9, titre: "Préparez le premier tiroir", texte: "Assemblez les quatre côtés du tiroir avec des chevilles en bois.", pieces: "cheville en bois × 4" },
-  { n: 10, titre: "Fixez la façade du premier tiroir", texte: "Vissez la façade sur le tiroir en vérifiant l’alignement.", pieces: "façade de tiroir × 1, vis 8 mm × 2" },
-  { n: 11, titre: "Préparez le deuxième tiroir", texte: "Répétez l’assemblage des côtés avec les chevilles en bois.", pieces: "cheville en bois × 4" },
-  { n: 12, titre: "Fixez la façade du deuxième tiroir", texte: "Vissez la façade du deuxième tiroir, en laissant un jeu régulier.", pieces: "façade de tiroir × 1, vis 8 mm × 2" },
-  { n: 13, titre: "Préparez le troisième tiroir", texte: "Assemblez le dernier tiroir et fixez sa façade.", pieces: "façade de tiroir × 1, cheville en bois × 4, vis 8 mm × 2" },
-  { n: 14, titre: "Glissez les tiroirs dans les coulisses", texte: "Engagez chaque tiroir sur ses coulisses jusqu’au clic.", pieces: "aucune" },
-  { n: 15, titre: "Fixez les poignées des tiroirs", texte: "Vissez une poignée au centre de chaque façade avec 2 vis de 4 mm. Serrez à la main, sans forcer.", pieces: "poignées × 3, vis 4 mm × 6" },
+  { n: 2, titre: "Insérez les chevilles dans le plateau", texte: "Enfoncez 6 chevilles en bois dans les trous du plateau, sans forcer.", pieces: "cheville en bois × 6", requetePexels: "wooden dowels" },
+  { n: 3, titre: "Fixez le premier panneau latéral", texte: "Emboîtez le panneau latéral gauche sur les chevilles, puis serrez 4 vis de 8 mm.", pieces: "panneau latéral × 1, vis 8 mm × 4", requetePexels: "assembling wooden furniture panel" },
+  { n: 4, titre: "Fixez le second panneau latéral", texte: "Faites la même chose du côté droit. Vérifiez que les deux panneaux sont bien parallèles.", pieces: "panneau latéral × 1, vis 8 mm × 4", requetePexels: "assembling wooden furniture panel" },
+  { n: 5, titre: "Assemblez les coulisses côté gauche", texte: "Vissez les trois coulisses de tiroir sur la face intérieure du panneau gauche.", pieces: "coulisse de tiroir × 3, vis 8 mm × 6", requetePexels: "drawer slide rail" },
+  { n: 6, titre: "Assemblez les coulisses côté droit", texte: "Vissez les trois coulisses restantes en face, à la même hauteur que celles de gauche.", pieces: "coulisse de tiroir × 3, vis 8 mm × 6", requetePexels: "drawer slide rail" },
+  { n: 7, titre: "Montez le fond du meuble", texte: "Glissez le fond dans la rainure arrière, puis fixez-le avec quelques vis.", pieces: "vis 8 mm × 4", requetePexels: "furniture back panel screws" },
+  { n: 8, titre: "Retournez le meuble", texte: "À deux si possible, redressez doucement le meuble sur ses pieds.", pieces: "aucune", requetePexels: "wooden chest of drawers" },
+  { n: 9, titre: "Préparez le premier tiroir", texte: "Assemblez les quatre côtés du tiroir avec des chevilles en bois.", pieces: "cheville en bois × 4", requetePexels: "wooden drawer box" },
+  { n: 10, titre: "Fixez la façade du premier tiroir", texte: "Vissez la façade sur le tiroir en vérifiant l’alignement.", pieces: "façade de tiroir × 1, vis 8 mm × 2", requetePexels: "drawer front wood" },
+  { n: 11, titre: "Préparez le deuxième tiroir", texte: "Répétez l’assemblage des côtés avec les chevilles en bois.", pieces: "cheville en bois × 4", requetePexels: "wooden drawer box" },
+  { n: 12, titre: "Fixez la façade du deuxième tiroir", texte: "Vissez la façade du deuxième tiroir, en laissant un jeu régulier.", pieces: "façade de tiroir × 1, vis 8 mm × 2", requetePexels: "drawer front wood" },
+  { n: 13, titre: "Préparez le troisième tiroir", texte: "Assemblez le dernier tiroir et fixez sa façade.", pieces: "façade de tiroir × 1, cheville en bois × 4, vis 8 mm × 2", requetePexels: "wooden drawer box" },
+  { n: 14, titre: "Glissez les tiroirs dans les coulisses", texte: "Engagez chaque tiroir sur ses coulisses jusqu’au clic.", pieces: "aucune", requetePexels: "open wooden drawer" },
+  { n: 15, titre: "Fixez les poignées des tiroirs", texte: "Vissez une poignée au centre de chaque façade avec 2 vis de 4 mm. Serrez à la main, sans forcer.", pieces: "poignées × 3, vis 4 mm × 6", requetePexels: "black drawer handle" },
 ];
 
 export const NB_ETAPES = etapes.length;

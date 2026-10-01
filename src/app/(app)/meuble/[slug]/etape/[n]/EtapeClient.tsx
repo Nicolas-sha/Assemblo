@@ -4,6 +4,7 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Bouton } from "@/components/ui/Bouton";
+import { FurnitureImage } from "@/components/ui/FurnitureImage";
 import { useToast } from "@/components/ui/Toast";
 import { NB_ETAPES, piecesVerification, type Etape } from "@/data/guide";
 import { useAppState } from "@/lib/app-state";
@@ -52,6 +53,8 @@ export function EtapeClient({ slug, nomMeuble, etape }: { slug: string; nomMeubl
         <div className="h-[260px] w-full overflow-hidden rounded-grand bg-carte md:h-[520px] md:min-w-0 md:flex-1">
           {etape.image ? (
             <img src={etape.image} alt={`Illustration de l’étape ${etape.n} : ${etape.titre}`} className="h-full w-full object-contain" />
+          ) : etape.requetePexels ? (
+            <FurnitureImage requete={etape.requetePexels} alt={`Illustration de l’étape ${etape.n} : ${etape.titre}`} className="h-full w-full" />
           ) : (
             <IllustrationVide n={etape.n} />
           )}

@@ -70,7 +70,9 @@ export function FurnitureImage({ requete, alt, imageLocale, contenir = false, cl
     return <div className={conteneur} aria-busy="true" />;
   }
   const distant = resolu && !distantKo ? resolu : null;
-  const src = distant ?? (imageLocale && !localeKo ? imageLocale : null);
+  // L'image locale (celle du Figma) prime sur Pexels.
+  const locale = imageLocale && !localeKo ? imageLocale : null;
+  const src = locale ?? distant;
   return (
     <div className={conteneur}>
       {src ? (
@@ -79,7 +81,7 @@ export function FurnitureImage({ requete, alt, imageLocale, contenir = false, cl
           src={src}
           alt={alt}
           className={`h-full w-full ${ajustement}`}
-          onError={() => (distant ? setDistantKo(true) : setLocaleKo(true))}
+          onError={() => (locale ? setLocaleKo(true) : setDistantKo(true))}
         />
       ) : (
         <Placeholder />
