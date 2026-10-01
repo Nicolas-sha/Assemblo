@@ -11,6 +11,7 @@ export function VerificationClient({ slug }: { slug: string }) {
   const { piecesCochees, basculerPiece } = useAppState();
   const { afficherToast } = useToast();
   const cochees = piecesCochees[slug] ?? [];
+  const toutCoche = piecesVerification.every((p) => cochees.includes(p.id));
 
   return (
     <div className="mx-auto w-full max-w-[1200px] pt-6 md:pt-7">
@@ -43,10 +44,15 @@ export function VerificationClient({ slug }: { slug: string }) {
         >
           Il me manque une pièce
         </Bouton>
-        <Bouton type="Primaire" pleineLargeur className="md:w-auto" href={`/meuble/${slug}/etape/1`}>
+        <Bouton type="Primaire" pleineLargeur className="md:w-auto" href={`/meuble/${slug}/etape/1`} disabled={!toutCoche}>
           Tout est là, je commence
         </Bouton>
       </div>
+      {!toutCoche && (
+        <p className="mt-3 text-legende text-texte-2" role="status">
+          Cochez toutes les pièces ({cochees.length}/{piecesVerification.length}) pour commencer.
+        </p>
+      )}
     </div>
   );
 }
