@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { Bouton } from "@/components/ui/Bouton";
 import { FurnitureImage } from "@/components/ui/FurnitureImage";
 import { useToast } from "@/components/ui/Toast";
-import { NB_ETAPES, piecesVerification, type Etape } from "@/data/guide";
+import { piecesVerification, type Etape } from "@/data/guide";
 import { useAppState } from "@/lib/app-state";
 
 function IllustrationVide({ n }: { n: number }) {
@@ -19,7 +19,7 @@ function IllustrationVide({ n }: { n: number }) {
   );
 }
 
-export function EtapeClient({ slug, nomMeuble, etape }: { slug: string; nomMeuble: string; etape: Etape }) {
+export function EtapeClient({ slug, nomMeuble, etape, total }: { slug: string; nomMeuble: string; etape: Etape; total: number }) {
   const { afficherToast } = useToast();
   const router = useRouter();
   const { piecesCochees, pret } = useAppState();
@@ -28,7 +28,7 @@ export function EtapeClient({ slug, nomMeuble, etape }: { slug: string; nomMeubl
   useEffect(() => {
     if (pret && !toutCoche) router.replace(`/meuble/${slug}/verification`);
   }, [pret, toutCoche, router, slug]);
-  const derniere = etape.n === NB_ETAPES;
+  const derniere = etape.n === total;
   const precedent = etape.n === 1 ? `/meuble/${slug}/verification` : `/meuble/${slug}/etape/${etape.n - 1}`;
   const suivant = derniere ? `/meuble/${slug}/fin` : `/meuble/${slug}/etape/${etape.n + 1}`;
 
@@ -37,21 +37,21 @@ export function EtapeClient({ slug, nomMeuble, etape }: { slug: string; nomMeubl
   return (
     <div className="mx-auto w-full max-w-[1200px] pt-6 md:pt-7">
       <p className="text-corps font-semibold text-texte-2">
-        Étape {etape.n} sur {NB_ETAPES} · {nomMeuble}
+        Étape {etape.n} sur {total} · {nomMeuble}
       </p>
       <div
         role="progressbar"
         aria-label="Progression du montage"
         aria-valuemin={1}
-        aria-valuemax={NB_ETAPES}
+        aria-valuemax={total}
         aria-valuenow={etape.n}
         className="mt-2 h-2 w-full overflow-hidden rounded bg-bordure"
       >
-        <div className="h-full rounded bg-action transition-[width] duration-500 ease-out" style={{ width: `${(etape.n / NB_ETAPES) * 100}%` }} />
+        <div className="h-full rounded bg-action transition-[width] duration-500 ease-out" style={{ width: `${(etape.n / total) * 100}%` }} />
       </div>
 
       <nav aria-label="Aller à une étape" className="-mx-6 mt-4 flex gap-2 overflow-x-auto px-6 pb-1 md:mx-0 md:flex-wrap md:overflow-visible md:px-0">
-        {Array.from({ length: NB_ETAPES }, (_, i) => i + 1).map((n) => {
+        {Array.from({ length: total }, (_, i) => i + 1).map((n) => {
           const actuelle = n === etape.n;
           const faite = n < etape.n;
           return (
