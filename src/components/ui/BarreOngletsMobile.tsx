@@ -36,10 +36,14 @@ export function BarreOngletsMobile({ actif }: BarreOngletsMobileProps) {
           </Link>
         );
       })}
-      <button type="button" aria-disabled="true" className={`${classesOnglet} cursor-default text-texte-2`}>
+      <Link
+        href="/profil"
+        aria-current={courant === "profil" ? "page" : undefined}
+        className={`${classesOnglet} ${courant === "profil" ? "text-action" : "text-texte-2"}`}
+      >
         <Icone nom="profil" taille={24} />
         Profil
-      </button>
+      </Link>
     </nav>
   );
 }

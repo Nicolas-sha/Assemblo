@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Icone } from "./Icone";
 
-export type OngletNav = "accueil" | "catalogue" | "montages";
+export type OngletNav = "accueil" | "catalogue" | "montages" | "profil";
 
 export type BarreNavigationDesktopProps = {
   /** Force l'onglet actif (sinon déduit de l'URL). */
@@ -12,7 +12,7 @@ export type BarreNavigationDesktopProps = {
   prenom?: string;
 };
 
-const LIENS: { id: OngletNav; libelle: string; href: string }[] = [
+const LIENS: { id: Exclude<OngletNav, "profil">; libelle: string; href: string }[] = [
   { id: "accueil", libelle: "Accueil", href: "/" },
   { id: "catalogue", libelle: "Catalogue", href: "/catalogue" },
   { id: "montages", libelle: "Montages", href: "/montages" },
@@ -23,6 +23,7 @@ export function ongletDepuisChemin(chemin: string): OngletNav | null {
   if (chemin === "/") return "accueil";
   if (chemin.startsWith("/catalogue")) return "catalogue";
   if (chemin.startsWith("/montages")) return "montages";
+  if (chemin.startsWith("/profil")) return "profil";
   if (/^\/meuble\/[^/]+\/merci/.test(chemin)) return "accueil";
   if (/^\/meuble\/[^/]+\/(verification|etape|fin)/.test(chemin)) return "montages";
   if (chemin.startsWith("/meuble")) return "catalogue";
@@ -56,10 +57,15 @@ export function BarreNavigationDesktop({ actif, prenom = "Léa" }: BarreNavigati
             );
           })}
         </nav>
-        <div className="ml-auto flex items-center gap-2">
+        <Link
+          href="/profil"
+          aria-label={`Profil de ${prenom} et déconnexion`}
+          aria-current={courant === "profil" ? "page" : undefined}
+          className="ml-auto flex min-h-11 items-center gap-2 rounded-moyen px-2 hover:bg-action-teinte focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-action"
+        >
           <Icone nom="avatar" taille={36} />
           <span className="text-corps font-semibold text-texte">{prenom}</span>
-        </div>
+        </Link>
       </div>
     </header>
   );
