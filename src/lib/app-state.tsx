@@ -98,8 +98,9 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
   }, []);
   const terminerMontage = useCallback((slug: string) => {
     const e = getSnapshot();
-    if (e.montagesTermines.includes(slug)) return;
-    ecrire({ ...e, montagesTermines: [...e.montagesTermines, slug] });
+    const piecesCochees = { ...e.piecesCochees, [slug]: [] };
+    if (e.montagesTermines.includes(slug)) return ecrire({ ...e, piecesCochees });
+    ecrire({ ...e, piecesCochees, montagesTermines: [...e.montagesTermines, slug] });
   }, []);
   const enregistrerAvis = useCallback((slug: string, avis: Avis) => {
     const e = getSnapshot();

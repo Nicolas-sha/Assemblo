@@ -1,6 +1,7 @@
 "use client";
 
 /* eslint-disable @next/next/no-img-element */
+import Link from "next/link";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Bouton } from "@/components/ui/Bouton";
@@ -48,6 +49,30 @@ export function EtapeClient({ slug, nomMeuble, etape }: { slug: string; nomMeubl
       >
         <div className="h-full rounded bg-action transition-[width] duration-500 ease-out" style={{ width: `${(etape.n / NB_ETAPES) * 100}%` }} />
       </div>
+
+      <nav aria-label="Aller à une étape" className="-mx-6 mt-4 flex gap-2 overflow-x-auto px-6 pb-1 md:mx-0 md:flex-wrap md:overflow-visible md:px-0">
+        {Array.from({ length: NB_ETAPES }, (_, i) => i + 1).map((n) => {
+          const actuelle = n === etape.n;
+          const faite = n < etape.n;
+          return (
+            <Link
+              key={n}
+              href={`/meuble/${slug}/etape/${n}`}
+              aria-label={`Étape ${n}${faite ? " (faite)" : ""}`}
+              aria-current={actuelle ? "step" : undefined}
+              className={`flex size-11 shrink-0 items-center justify-center rounded-moyen border-[1.5px] text-corps font-bold transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-action ${
+                actuelle
+                  ? "border-action bg-action text-texte-inverse"
+                  : faite
+                    ? "border-action bg-action-teinte text-action hover:bg-carte"
+                    : "border-bordure bg-carte text-texte-2 hover:border-action hover:text-action"
+              }`}
+            >
+              {n}
+            </Link>
+          );
+        })}
+      </nav>
 
       <div className="mt-6 flex flex-col gap-6 md:mt-8 md:flex-row md:gap-8">
         <div className="h-[260px] w-full overflow-hidden rounded-grand bg-carte md:h-[520px] md:min-w-0 md:flex-1">

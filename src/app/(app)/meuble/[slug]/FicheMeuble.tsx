@@ -7,11 +7,13 @@ import { FurnitureImage } from "@/components/ui/FurnitureImage";
 import { Modale } from "@/components/ui/Modale";
 import { useToast } from "@/components/ui/Toast";
 import type { Meuble } from "@/data/meubles";
+import { useAppState } from "@/lib/app-state";
 
 export function FicheMeuble({ meuble }: { meuble: Meuble }) {
   const [modale, setModale] = useState(false);
   const { afficherToast } = useToast();
   const router = useRouter();
+  const { reinitialiserPieces } = useAppState();
   const chiffres = [
     { valeur: meuble.duree, libelle: "Durée" },
     { valeur: String(meuble.nbEtapes), libelle: "Étapes" },
@@ -19,6 +21,7 @@ export function FicheMeuble({ meuble }: { meuble: Meuble }) {
   ];
 
   function commencer() {
+    reinitialiserPieces(meuble.slug); // nouveau montage : toutes les pièces décochées
     afficherToast("succes", "Montage commencé : votre progression est enregistrée.");
     router.push(`/meuble/${meuble.slug}/verification`);
   }
