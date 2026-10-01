@@ -38,7 +38,7 @@ export function Note({ valeur, onChange, lectureSeule = false, className = "" }:
           onMouseEnter={() => !lectureSeule && setSurvol(n)}
           onFocus={() => !lectureSeule && setSurvol(n)}
           onBlur={() => setSurvol(null)}
-          className="rounded-petit focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-action enabled:cursor-pointer"
+          className="rounded-petit p-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-action enabled:cursor-pointer"
         >
           <Etoile pleine={n <= affichee} />
         </button>

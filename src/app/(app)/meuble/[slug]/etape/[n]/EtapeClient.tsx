@@ -60,6 +60,7 @@ export function EtapeClient({ slug, nomMeuble, etape }: { slug: string; nomMeubl
               href={`/meuble/${slug}/etape/${n}`}
               aria-label={`Étape ${n}${faite ? " (faite)" : ""}`}
               aria-current={actuelle ? "step" : undefined}
+              ref={actuelle ? (el) => { const c = el?.parentElement; if (el && c) c.scrollLeft = el.offsetLeft - c.clientWidth / 2 + el.offsetWidth / 2; } : undefined}
               className={`flex size-11 shrink-0 items-center justify-center rounded-moyen border-[1.5px] text-corps font-bold transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-action ${
                 actuelle
                   ? "border-action bg-action text-texte-inverse"
@@ -93,16 +94,16 @@ export function EtapeClient({ slug, nomMeuble, etape }: { slug: string; nomMeubl
             <button
               type="button"
               onClick={() => afficherToast("info", "Nous avons bien noté votre problème.")}
-              className="w-fit cursor-pointer rounded-petit text-corps font-semibold text-action transition-colors duration-150 hover:text-action-survol focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-action"
+              className="min-h-11 w-fit cursor-pointer rounded-petit text-corps font-semibold text-action transition-colors duration-150 hover:text-action-survol focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-action"
             >
               J’ai un problème
             </button>
           </div>
           <div className="flex gap-3 pt-2">
-            <Bouton type="Secondaire" href={precedent} className="w-[132px] shrink-0 md:w-auto">
+            <Bouton type="Secondaire" href={precedent} className="shrink-0 !px-4 md:!px-6">
               Précédent
             </Bouton>
-            <Bouton type="Primaire" href={suivant} className="flex-1 whitespace-nowrap md:flex-none">
+            <Bouton type="Primaire" href={suivant} className="min-w-0 flex-1 !px-4 md:flex-none md:whitespace-nowrap md:!px-6">
               {derniere ? "Terminer le montage" : "Étape suivante"}
             </Bouton>
           </div>

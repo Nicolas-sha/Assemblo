@@ -15,7 +15,7 @@ export function VerificationClient({ slug }: { slug: string }) {
 
   return (
     <div className="mx-auto w-full max-w-[1200px] pt-6 md:pt-7">
-      <Bouton type="Texte" href={`/meuble/${slug}`} className="-ml-6 !min-h-0 !px-6 !py-2 text-legende md:text-corps">
+      <Bouton type="Texte" href={`/meuble/${slug}`} className="-ml-6 !min-h-11 !py-2 text-corps">
         ← Retour
       </Bouton>
       <h1 className="mt-2 text-titre font-bold text-texte">Vérifiez vos pièces</h1>
