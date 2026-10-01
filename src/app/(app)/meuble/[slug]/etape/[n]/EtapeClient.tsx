@@ -1,9 +1,12 @@
 "use client";
 
 /* eslint-disable @next/next/no-img-element */
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { Bouton } from "@/components/ui/Bouton";
 import { useToast } from "@/components/ui/Toast";
-import { NB_ETAPES, type Etape } from "@/data/guide";
+import { NB_ETAPES, piecesVerification, type Etape } from "@/data/guide";
+import { useAppState } from "@/lib/app-state";
 
 function IllustrationVide({ n }: { n: number }) {
   return (
@@ -16,9 +19,18 @@ function IllustrationVide({ n }: { n: number }) {
 
 export function EtapeClient({ slug, nomMeuble, etape }: { slug: string; nomMeuble: string; etape: Etape }) {
   const { afficherToast } = useToast();
+  const router = useRouter();
+  const { piecesCochees, pret } = useAppState();
+  const cochees = piecesCochees[slug] ?? [];
+  const toutCoche = piecesVerification.every((p) => cochees.includes(p.id));
+  useEffect(() => {
+    if (pret && !toutCoche) router.replace(`/meuble/${slug}/verification`);
+  }, [pret, toutCoche, router, slug]);
   const derniere = etape.n === NB_ETAPES;
   const precedent = etape.n === 1 ? `/meuble/${slug}/verification` : `/meuble/${slug}/etape/${etape.n - 1}`;
   const suivant = derniere ? `/meuble/${slug}/fin` : `/meuble/${slug}/etape/${etape.n + 1}`;
+
+  if (!pret || !toutCoche) return null;
 
   return (
     <div className="mx-auto w-full max-w-[1200px] pt-6 md:pt-7">
