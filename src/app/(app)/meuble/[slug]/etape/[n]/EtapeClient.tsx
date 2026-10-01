@@ -76,7 +76,7 @@ export function EtapeClient({ slug, nomMeuble, etape, total }: { slug: string; n
       </nav>
 
       <div className="mt-6 flex flex-col gap-6 md:mt-8 md:flex-row md:gap-8">
-        <div className="h-[260px] w-full overflow-hidden rounded-grand bg-carte md:h-[520px] md:min-w-0 md:flex-1">
+        <div className="h-[260px] w-full overflow-hidden rounded-grand bg-schema md:h-[520px] md:min-w-0 md:flex-1">
           {etape.image ? (
             <img src={etape.image} alt={`Illustration de l’étape ${etape.n} : ${etape.titre}`} className="h-full w-full object-contain" />
           ) : etape.requetePexels ? (
