@@ -38,11 +38,12 @@ export function FormulaireConnexion() {
       </section>
 
       <section className="flex flex-1 items-start justify-center px-6 py-8 md:items-center md:px-12 md:py-0">
-        <form onSubmit={surSoumission} className="flex w-full max-w-[400px] flex-col gap-4">
+        {/* noValidate : connexion factice, n'importe quelle saisie (ou aucune) est acceptée */}
+        <form onSubmit={surSoumission} noValidate className="flex w-full max-w-[400px] flex-col gap-4">
           <h1 className="text-titre font-bold text-texte">Connexion</h1>
           <p className="text-corps text-texte-2">Connectez-vous pour retrouver vos meubles et vos montages.</p>
-          <Champ etiquette="Adresse e-mail" type="email" defaultValue="lea@exemple.fr" autoComplete="email" />
-          <Champ etiquette="Mot de passe" type="password" defaultValue="••••••••" autoComplete="current-password" />
+          <Champ etiquette="Adresse e-mail" type="email" placeholder="lea@exemple.fr" autoComplete="email" />
+          <Champ etiquette="Mot de passe" type="password" placeholder="••••••••" autoComplete="current-password" />
           <Bouton htmlType="submit" libelle="Se connecter" pleineLargeur />
           <Bouton type="Texte" libelle="Créer un compte" onClick={entrer} className="self-center" />
         </form>
